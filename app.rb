@@ -18,8 +18,9 @@ post '/ironmq_push_2' do
 end
 
 def add_to_store(key)
-  p request.body
-  body = JSON.parse(request.body)
+  body = request.body.read
+  p body
+  body = JSON.parse(body)
   item = IRON_CACHE.get(key)
   if item
     val = JSON.parse(item.value)
@@ -39,12 +40,16 @@ get '/' do
     item = IRON_CACHE.get("push_1_store")
     if item
       ret << item.value
+    else
+      ret << "Nothing here yet."
     end
 
     ret << "<br/><br/>From ironmq_push_2 endpoint:<br/>"
     item = IRON_CACHE.get("push_2_store")
     if item
       ret << item.value
+    else
+      ret << "Nothing here yet."
     end
   rescue Exception => ex
     puts "ERROR! #{ex}"
