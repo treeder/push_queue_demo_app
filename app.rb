@@ -20,7 +20,7 @@ end
 def add_to_store(key)
   body = request.body.read
   p body
-  body = JSON.parse(body)
+  #body = JSON.parse(body)
   item = IRON_CACHE.get(key)
   if item
     val = JSON.parse(item.value)
