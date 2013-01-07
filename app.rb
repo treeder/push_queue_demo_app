@@ -1,7 +1,8 @@
 require 'sinatra'
 require 'iron_cache'
 
-IRON_CACHE = IronCache::Client.new
+IRON_CACHE_CLIENT = IronCache::Client.new
+IRON_CACHE = IRON_CACHE_CLIENT.cache("pushq-demo-cache")
 
 post '/ironmq_push_1' do
   p params
@@ -39,14 +40,15 @@ get '/' do
     if item
       ret << item.value
     end
-    ret << "<br/><br/>From ironmq_push_2 endpoint:<br/>"
 
+    ret << "<br/><br/>From ironmq_push_2 endpoint:<br/>"
     item = IRON_CACHE.get("push_2_store")
     if item
       ret << item.value
     end
   rescue Exception => ex
-    p ex
+    puts "ERROR! #{ex}"
+    p ex.backtrace
   end
   ret
 end
