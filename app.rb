@@ -40,7 +40,7 @@ end
 
 get '/' do
   puts "IN / endpoint"
-  ret = "These are the IronMQ messages I received:"
+  ret = "I like getting messages from IronMQ!"
   begin
 
     ret << "<br/><br/>From ironmq_push_1 endpoint:<br/>"
