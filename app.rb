@@ -31,7 +31,7 @@ def add_to_store(key)
       val = []
     end
     val << body
-    IRON_CACHE.put(key, val.to_json)
+    IRON_CACHE.put(key, val.to_json, expires_in: 3600)
   rescue Exception => ex
     puts "ERROR adding to cache: #{ex}"
     p ex.backtrace
