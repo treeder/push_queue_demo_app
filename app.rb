@@ -5,7 +5,7 @@ IRON_CACHE_CLIENT = IronCache::Client.new
 IRON_CACHE = IRON_CACHE_CLIENT.cache("pushq-demo-cache")
 
 post '/ironmq_push_1' do
-  p params
+  p request.body
   cache_key = "push_1_store"
   add_to_store(cache_key)
   "got it!"
